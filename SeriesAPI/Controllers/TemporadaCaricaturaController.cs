@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Modelos.Enums;
 using Modelos.Request;
 using Modelos.Response;
 using Negocio;
@@ -30,11 +31,12 @@ namespace SeriesAPI.Controllers
                 return BadRequest(response);
             }
 
-            int registroId = int.TryParse(response.Result?.InnerText, out var id) ? id : 0;
+            int registroId = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
+            string nombre = response.Result?["Nombre"]?.InnerText!;
             response.Result = null;
 
             // Registrar bitácora
-            await _service.RegistrarBitacoraCarga("Temporada", request.Nombre, "Temporada agregada", registroId);
+            await _service.RegistrarBitacoraCarga(SeccionBitacora.TemporadaCaricatura, nombre, ProcesoBitacora.Agregado, registroId);
 
             return Ok(response);
         }
@@ -51,11 +53,12 @@ namespace SeriesAPI.Controllers
                 return BadRequest(response);
             }
 
-            int registroId = int.TryParse(response.Result?.InnerText, out var id) ? id : 0;
+            int registroId = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
+            string nombre = response.Result?["Nombre"]?.InnerText!;
             response.Result = null;
 
             // Registrar bitácora
-            await _service.RegistrarBitacoraCarga("Temporada", request.Nombre, "Temporada actualizada", registroId);
+            await _service.RegistrarBitacoraCarga(SeccionBitacora.TemporadaCaricatura, nombre, ProcesoBitacora.Actualizado, registroId);
 
             return Ok(response);
         }
@@ -72,12 +75,12 @@ namespace SeriesAPI.Controllers
                 return BadRequest(response);
             }
 
-            int id = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
+            int registroId = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
             string nombre = response.Result?["Nombre"]?.InnerText!;
             response.Result = null;
 
             // Registrar bitácora
-            await _service.RegistrarBitacoraCarga("Temporada", nombre, "Temporada eliminada", id);
+            await _service.RegistrarBitacoraCarga(SeccionBitacora.TemporadaCaricatura, nombre, ProcesoBitacora.Eliminado, registroId);
 
             return Ok(response);
         }

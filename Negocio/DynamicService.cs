@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Modelos.Enums;
 using Modelos.Request;
 using Modelos.Response;
 using System.Data;
@@ -328,16 +329,15 @@ namespace Negocio
         }
 
         #region Bitacoras
-        public async Task RegistrarBitacoraCarga(string tabla, string nombre, string proceso, int registroId, int? usuarioId = null)
+        public async Task RegistrarBitacoraCarga(SeccionBitacora seccion, string nombre, ProcesoBitacora proceso, int registroId, int? usuarioId = null)
         {
             var bitacora = new BitacoraCargaRequest
             {
-                Tabla = tabla,
+                SeccionId = (int)seccion,
                 Nombre = nombre,
-                //UsuarioId = (UsuarioId == 1 || UsuarioId == 0) ? (usuarioId ?? UsuarioId) : UsuarioId,
                 UsuarioId = ResolverUsuarioId(usuarioId),
                 Modificado = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified),
-                Proceso = proceso,
+                ProcesoBitacoraId = (int)proceso,
                 RegistroId = registroId
             };
 
@@ -348,7 +348,6 @@ namespace Negocio
         {
             var bitacora = new BitacoraErrorRequest
             {
-                //UsuarioId = (UsuarioId == 1 || UsuarioId == 0) ? (usuarioId ?? UsuarioId) : UsuarioId,
                 UsuarioId = ResolverUsuarioId(usuarioId),
                 Code = code,
                 FechaRegistro = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified),

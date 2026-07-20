@@ -10,7 +10,7 @@
         public string Director { get; set; } = string.Empty;
         public DateTime? Estreno { get; set; }
         public DateTime? EstrenoMexico { get; set; }
-        public decimal Calificacion { get; set; }
+        public decimal? Calificacion { get; set; }
         public string Genero { get; set; } = string.Empty;
         public string Duracion { get; set; } = string.Empty;
         public int ClasificacionId { get; set; }

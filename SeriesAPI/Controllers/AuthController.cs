@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modelos.Auth;
+using Modelos.Enums;
 using Modelos.Request;
 using Modelos.Response;
 using Negocio;
@@ -34,11 +35,12 @@ namespace SeriesAPI.Controllers
                 return BadRequest(response);
             }
 
-            int registroId = int.TryParse(response.Result?.InnerText, out var id) ? id : 0;
+            int registroId = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
+            string nombre = response.Result?["Nombre"]?.InnerText!;
             response.Result = null;
 
             // Registrar bitácora
-            await _service.RegistrarBitacoraCarga("Usuario", request.Usuario, "Usuario agregado", registroId);
+            await _service.RegistrarBitacoraCarga(SeccionBitacora.Usuarios, nombre, ProcesoBitacora.Agregado, registroId);
 
             return Ok(response);
         }
@@ -57,12 +59,12 @@ namespace SeriesAPI.Controllers
                 return BadRequest(response);
             }
 
-            // Extraer ID del <Result> (si está como número plano)
-            int registroId = int.TryParse(response.Result?.InnerText, out var id) ? id : 0;
+            int registroId = int.TryParse(response.Result?["Id"]?.InnerText, out var parsedId) ? parsedId : 0;
+            string nombre = response.Result?["Nombre"]?.InnerText!;
             response.Result = null;
 
             // Registrar bitácora
-            await _service.RegistrarBitacoraCarga("Usuario", request.Usuario, "Usuario actualizado", registroId);
+            await _service.RegistrarBitacoraCarga(SeccionBitacora.Usuarios, nombre, ProcesoBitacora.Actualizado, registroId);
 
             return Ok(response);
         }

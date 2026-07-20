@@ -17,7 +17,7 @@ namespace Modelos.Response
     {
         public string Serie { get; set; } = string.Empty;
         public string Estado { get; set; } = string.Empty;
-        public int Semanas { get; set; }
+        public string Semanas { get; set; } = string.Empty;
         public int Anios { get; set; }
         public int TotalRegistros { get; set; }
     }
