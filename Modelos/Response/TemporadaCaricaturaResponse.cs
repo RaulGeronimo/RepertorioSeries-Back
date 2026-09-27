@@ -2,29 +2,20 @@
 
 namespace Modelos.Response
 {
-    public class TemporadaCaricaturaBaseResponse
+    public class TemporadasCaricaturaResponse
     {
         public int TemporadaId { get; set; }
+        public string Caricatura { get; set; } = string.Empty;
         public string Nombre { get; set; } = string.Empty;
         public int Capitulos { get; set; }
         public decimal Calificacion { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }
-        public string Portada { get; set; } = string.Empty;
-    }
-
-    public class TemporadasCaricaturaResponse : TemporadaCaricaturaBaseResponse
-    {
-        public string Caricatura { get; set; } = string.Empty;
         public string Estado { get; set; } = string.Empty;
         public string Semanas { get; set; } = string.Empty;
         public int Anios { get; set; }
+        public string Portada { get; set; } = string.Empty;
         public int TotalRegistros { get; set; }
-    }
-
-    public class TemporadaCaricaturaResponse : TemporadaCaricaturaBaseResponse
-    {
-        public int CaricaturaId { get; set; }
     }
 
     [XmlRoot("Temporadas")]

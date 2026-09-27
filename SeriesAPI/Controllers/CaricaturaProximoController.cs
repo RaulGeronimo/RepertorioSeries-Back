@@ -90,7 +90,7 @@ namespace SeriesAPI.Controllers
         [HttpGet("{caricaturaProximoId}")]
         public async Task<IActionResult> ObtenerPorId(int caricaturaProximoId)
         {
-            var (response, item) = await _service.EjecutarSPPorId<CaricaturasResumenListResponse<CaricaturaProximoResponse>, CaricaturaProximoResponse>("scBuscarCaricaturaProximoId", "@CaricaturaProximoId", caricaturaProximoId);
+            var (response, item) = await _service.EjecutarSPPorId<CaricaturasResumenListResponse<CaricaturaProximoRequest>, CaricaturaProximoRequest>("scBuscarCaricaturaProximoId", "@CaricaturaProximoId", caricaturaProximoId);
 
             if (!response.Success)
             { return BadRequest(response); }

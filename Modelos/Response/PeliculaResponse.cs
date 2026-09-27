@@ -2,9 +2,10 @@
 
 namespace Modelos.Response
 {
-    public class PeliculaBaseResponse
+    public class PeliculasResponse
     {
         public int PeliculaId { get; set; }
+        public string Universo { get; set; } = string.Empty;
         public string Nombre { get; set; } = string.Empty;
         public string OtrosNombres { get; set; } = string.Empty;
         public string Director { get; set; } = string.Empty;
@@ -13,24 +14,11 @@ namespace Modelos.Response
         public decimal Calificacion { get; set; }
         public string Genero { get; set; } = string.Empty;
         public string Duracion { get; set; } = string.Empty;
+        public string Clasificacion { get; set; } = string.Empty;
         public string Productora { get; set; } = string.Empty;
         public string Distribuidora { get; set; } = string.Empty;
         public string Portada { get; set; } = string.Empty;
-    }
-
-    public class PeliculasResponse : PeliculaBaseResponse
-    {
-        public string Universo { get; set; } = string.Empty;
-        public string Clasificacion { get; set; } = string.Empty;
         public int TotalRegistros { get; set; }
-    }
-
-    public class PeliculaResponse : PeliculaBaseResponse
-    {
-        public int CaricaturaId { get; set; }
-        public int SerieId { get; set; }
-        public int ClasificacionId { get; set; }
-
     }
 
     [XmlRoot("Peliculas")]

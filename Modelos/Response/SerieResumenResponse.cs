@@ -22,24 +22,6 @@ namespace Modelos.Response
         public bool EsProximo { get; set; } = true;
     }
 
-    #region Obtener Id
-    public class SerieSiguiendoResponse
-    {
-        public int SerieSiguiendoId { get; set; }
-        public int UsuarioId { get; set; }
-        public int TemporadaId { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime? FechaFin { get; set; }
-    }
-
-    public class SerieProximoResponse
-    {
-        public int SerieProximoId { get; set; }
-        public int UsuarioId { get; set; }
-        public int TemporadaId { get; set; }
-    }
-    #endregion Obtener Id
-
     [XmlRoot("Temporadas")]
     public class SeriesResumenListResponse<T>
     {

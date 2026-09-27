@@ -99,7 +99,7 @@ namespace SeriesAPI.Controllers
         [HttpGet("{SerieId}")]
         public async Task<IActionResult> ObtenerPorId(int SerieId)
         {
-            var (response, item) = await _service.EjecutarSPPorId<SeriesListResponse<SerieResponse>, SerieResponse>("scBuscarSerieId", "@SerieId", SerieId);
+            var (response, item) = await _service.EjecutarSPPorId<SeriesListResponse<SerieRequest>, SerieRequest>("scBuscarSerieId", "@SerieId", SerieId);
 
             if (!response.Success)
             { return BadRequest(response); }
